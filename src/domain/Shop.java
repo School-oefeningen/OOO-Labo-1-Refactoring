@@ -2,6 +2,7 @@ package domain;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Shop {
@@ -11,20 +12,30 @@ public class Shop {
         this.products = new ArrayList<>();
     }
 
+    public List<Product> getProducts() {
+        products.sort(new ComparatorByType());
+        return products;
+    }
+
     public void addProduct() {
         String title = JOptionPane.showInputDialog("Enter the title:");
         String id = JOptionPane.showInputDialog("Enter the id:");
-        String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game):");
+        String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game/C for cd):");
 
         try {
-            if (type.trim().toLowerCase().equals("m")) {
-                Movie m = new Movie(title, id);
-                products.add(m);
-
-            } else if (type.trim().toLowerCase().equals("g")) {
-                Game p = new Game(title, id);
-                products.add(p);
+            Product p = null;
+            switch (type.trim().toLowerCase()) {
+                case "m":
+                    p = new Movie(title, id);
+                    break;
+                case "g":
+                    p = new Game(title, id);
+                    break;
+                case "c":
+                    p = new Cd(title, id);
+                    break;
             }
+            products.add(p);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -33,8 +44,16 @@ public class Shop {
     public void showProduct() {
         String id = JOptionPane.showInputDialog("Enter the id:");
         Product p = findProduct(id);
-        if (p != null) {
-            JOptionPane.showMessageDialog(null, p.getProductTitle());
+        if (p != null) JOptionPane.showMessageDialog(null, p.getProductTitle());
+    }
+
+    public void showProducts() {
+        if (!products.isEmpty()) {
+            String out = "";
+            for (Product p: getProducts()) {
+                out += p.toString() + "\n";
+            }
+            JOptionPane.showMessageDialog(null, out);
         }
     }
 

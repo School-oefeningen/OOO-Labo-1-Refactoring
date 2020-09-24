@@ -31,4 +31,8 @@ public abstract class Product {
     }
 
     public abstract double getPrice(int days);
+
+    public String toString() {
+        return "Type: " + this.getClass().getSimpleName() + ", id: " + productId + ", title: " + productTitle;
+    }
 }
