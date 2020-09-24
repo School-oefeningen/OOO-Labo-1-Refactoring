@@ -8,7 +8,7 @@ public class ShopUi {
     public static void main(String[] args) {
         Shop shop = new Shop();
 
-        String menu = "1. Add product\n2. Show product\n3. Show rental price\n4. Show products list\n\n0. Quit";
+        String menu = "1. Add product\n2. Show product\n3. Show rental price\n4. Show products list\n5. Lent product\n\n0. Quit";
         int choice = -1;
         while (choice != 0) {
             String choiceString = JOptionPane.showInputDialog(menu);
@@ -21,6 +21,8 @@ public class ShopUi {
                 shop.showPrice();
             } else if (choice == 4){
                 shop.showProducts();
+            } else if (choice == 5){
+                shop.lentProduct();
             }
         }
     }

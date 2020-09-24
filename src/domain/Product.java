@@ -2,10 +2,12 @@ package domain;
 
 public abstract class Product {
     private String productTitle, productId;
+    private boolean isAvailable;
 
     public Product(String productTitle, String productId) {
         setProductTitle(productTitle);
         setProductId(productId);
+        isAvailable = true;
     }
 
     public String getProductTitle() {
@@ -28,6 +30,14 @@ public abstract class Product {
             throw new IllegalArgumentException("Product id mag niet leeg zijn");
         }
         this.productId = productId;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setLent() {
+        isAvailable = false;
     }
 
     public abstract double getPrice(int days);

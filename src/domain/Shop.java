@@ -2,7 +2,6 @@ package domain;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Shop {
@@ -44,7 +43,12 @@ public class Shop {
     public void showProduct() {
         String id = JOptionPane.showInputDialog("Enter the id:");
         Product p = findProduct(id);
-        if (p != null) JOptionPane.showMessageDialog(null, p.getProductTitle());
+        if (p != null) {
+            String out = p.getProductTitle() + "\n";
+            if (p.isAvailable()) out += "The product is available.";
+            else out += "The product is being lent.";
+            JOptionPane.showMessageDialog(null, out);
+        }
     }
 
     public void showProducts() {
@@ -80,5 +84,15 @@ public class Shop {
             return products.get(idx);
         }
         return null;
+    }
+
+    public void lentProduct() {
+        String id = JOptionPane.showInputDialog("Enter the id:");
+        Product p = findProduct(id);
+        if (p != null && p.isAvailable()) {
+            p.setLent();
+            String out = "The product '" + p.getProductTitle() + "' is now being lent.";
+            JOptionPane.showMessageDialog(null, out);
+        }
     }
 }
