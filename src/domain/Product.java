@@ -12,7 +12,7 @@ public abstract class Product {
         return productTitle;
     }
 
-    public void setProductTitle(String productTitle) {
+    private void setProductTitle(String productTitle) {
         if (Checker.isEmptyString(productTitle)) {
             throw new IllegalArgumentException("Producttitel mag niet leeg zijn");
         }
@@ -23,7 +23,7 @@ public abstract class Product {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    private void setProductId(String productId) {
         if (Checker.isEmptyString(productId)) {
             throw new IllegalArgumentException("Product id mag niet leeg zijn");
         }

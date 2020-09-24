@@ -19,11 +19,11 @@ public class Shop {
 
     public void addProduct() {
         String title = JOptionPane.showInputDialog("Enter the title:");
-        String id = JOptionPane.showInputDialog("Enter the id:");
         String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game/C for cd):");
 
         try {
             Product p = null;
+            String id = Integer.toString(products.size() + 1);
             switch (type.trim().toLowerCase()) {
                 case "m":
                     p = new Movie(title, id);
