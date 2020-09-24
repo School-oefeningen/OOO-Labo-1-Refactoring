@@ -40,6 +40,12 @@ public class Shop {
         }
     }
 
+    public void addProduct(Product p) {
+        if (p != null) {
+            products.add(p);
+        }
+    }
+
     public void showProduct() {
         String id = JOptionPane.showInputDialog("Enter the id:");
         Product p = findProduct(id);

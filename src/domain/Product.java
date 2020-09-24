@@ -45,4 +45,8 @@ public abstract class Product {
     public String toString() {
         return "Type: " + this.getClass().getSimpleName() + ", id: " + productId + ", title: " + productTitle;
     }
+
+    public String toCSV() {
+        return this.getClass().getSimpleName() + ";" + productTitle + ";" + productId;
+    }
 }
