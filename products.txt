@@ -1,3 +1,5 @@
 Movie;1917;3
+Movie;Mad Max Fury Road;4
 Game;Hollow Knight;2
+Game;Celeste;5
 Cd;QALF;1

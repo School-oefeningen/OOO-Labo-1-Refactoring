@@ -8,11 +8,11 @@ public class ComparatorByType implements Comparator<Product> {
     public int compare(Product p1, Product p2) {
         if (p1 == null || p2 == null) return 1;
 
-        if (p1.getClass() == p2.getClass()) {
-            return 0;
-        } else if (p1 instanceof Movie) {
+        if (p1.getProductBehaviour() == p2.getProductBehaviour()) {
+            return p1.getProductId().compareTo(p2.getProductId());
+        } else if (p1.getProductBehaviour() instanceof Movie) {
             return -1;
-        } else if (p1 instanceof Game && !(p2 instanceof Movie)) {
+        } else if (p1.getProductBehaviour() instanceof Game && !(p2.getProductBehaviour() instanceof Movie)) {
             return -1;
         } else {
             return 1;

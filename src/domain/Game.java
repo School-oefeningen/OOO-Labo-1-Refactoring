@@ -1,10 +1,6 @@
 package domain;
 
-public class Game extends Product {
-
-    public Game(String productTitle, String productId) {
-        super(productTitle, productId);
-    }
+public class Game implements ProductBehaviour {
 
     @Override
     public double getPrice(int days) {

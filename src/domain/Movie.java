@@ -1,11 +1,8 @@
 package domain;
 
-public class Movie extends Product {
+public class Movie implements ProductBehaviour {
     private final static int PRICE = 5;
 
-    public Movie(String productTitle, String productId) {
-        super(productTitle, productId);
-    }
 
     @Override
     public double getPrice(int days) {

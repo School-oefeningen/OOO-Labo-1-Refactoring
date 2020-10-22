@@ -1,5 +1,7 @@
 package domain;
 
+import org.w3c.dom.DOMException;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +23,17 @@ public class Shop {
         String type = JOptionPane.showInputDialog("Enter the type (M for movie/G for game/C for cd):");
 
         try {
-            Product p = null;
             String id = Integer.toString(products.size() + 1);
+            Product p = new Product(title, id);
             switch (type.trim().toLowerCase()) {
                 case "m":
-                    p = new Movie(title, id);
+                    p.setProductBehaviour(new Movie());
                     break;
                 case "g":
-                    p = new Game(title, id);
+                    p.setProductBehaviour(new Game());
                     break;
                 case "c":
-                    p = new Cd(title, id);
+                    p.setProductBehaviour(new Cd());
                     break;
             }
             products.add(p);
@@ -77,11 +79,13 @@ public class Shop {
         }
     }
 
-    private Product findProduct(String id) {
+    private Product findProduct(String productId) {
+        if (Checker.isEmptyString(productId)) throw new DomainException("Product id can't be empty");
+
         int idx = -1;
         boolean found = false;
         for (int i = 0; i < products.size() && !found; i++) {
-            if (products.get(i).getProductId().equals(id)) {
+            if (products.get(i).getProductId().equals(productId)) {
                 idx = i;
                 found = true;
             }

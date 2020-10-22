@@ -45,16 +45,16 @@ public class ShopUi {
                 String s = scannerFile.nextLine();
                 String[] parts = s.split(";");
 
-                Product p = null;
+                Product p = new Product(parts[1], parts[2]);;
                 switch (parts[0]) {
                     case "Movie":
-                        p = new Movie(parts[1], parts[2]);
+                        p.setProductBehaviour(new Movie());
                         break;
                     case "Game":
-                        p = new Game(parts[1], parts[2]);
+                        p.setProductBehaviour(new Game());
                         break;
                     case "Cd":
-                        p = new Cd(parts[1], parts[2]);
+                        p.setProductBehaviour(new Cd());
                         break;
                 }
                 shop.addProduct(p);

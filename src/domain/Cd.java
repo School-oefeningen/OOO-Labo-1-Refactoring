@@ -1,10 +1,6 @@
 package domain;
 
-public class Cd extends Product {
-
-    public Cd(String productTitle, String productId) {
-        super(productTitle, productId);
-    }
+public class Cd implements ProductBehaviour {
 
     @Override
     public double getPrice(int days) {

@@ -1,6 +1,7 @@
 package domain;
 
-public abstract class Product {
+public class Product {
+    private ProductBehaviour productBehaviour;
     private String productTitle, productId;
     private boolean isAvailable;
 
@@ -10,14 +11,20 @@ public abstract class Product {
         isAvailable = true;
     }
 
+    public ProductBehaviour getProductBehaviour() {
+        return productBehaviour;
+    }
+
+    public void setProductBehaviour(ProductBehaviour productBehaviour) {
+        this.productBehaviour = productBehaviour;
+    }
+
     public String getProductTitle() {
         return productTitle;
     }
 
     private void setProductTitle(String productTitle) {
-        if (Checker.isEmptyString(productTitle)) {
-            throw new IllegalArgumentException("Producttitel mag niet leeg zijn");
-        }
+        if (Checker.isEmptyString(productTitle)) throw new DomainException("Producttitel can't be empty");
         this.productTitle = productTitle;
     }
 
@@ -26,9 +33,7 @@ public abstract class Product {
     }
 
     private void setProductId(String productId) {
-        if (Checker.isEmptyString(productId)) {
-            throw new IllegalArgumentException("Product id mag niet leeg zijn");
-        }
+        if (Checker.isEmptyString(productId)) throw new DomainException("Product id can't be empty");
         this.productId = productId;
     }
 
@@ -40,13 +45,16 @@ public abstract class Product {
         isAvailable = false;
     }
 
-    public abstract double getPrice(int days);
+    public double getPrice(int days) {
+        if (days <= 0) throw new DomainException("Amount of days can't be negative or zerp");
+        return productBehaviour.getPrice(days);
+    }
 
     public String toString() {
-        return "Type: " + this.getClass().getSimpleName() + ", id: " + productId + ", title: " + productTitle;
+        return "Type: " + productBehaviour.getClass().getSimpleName() + ", id: " + productId + ", title: " + productTitle;
     }
 
     public String toCSV() {
-        return this.getClass().getSimpleName() + ";" + productTitle + ";" + productId;
+        return productBehaviour.getClass().getSimpleName() + ";" + productTitle + ";" + productId;
     }
 }
